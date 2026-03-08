@@ -1,0 +1,5 @@
+model,total_errors,error_rate,Ent_to_Neu,Ent_to_Con,Neu_to_Ent,Neu_to_Con,Con_to_Neu,Con_to_Ent
+DeBERTa-v3-base,79,9.875,30,0,11,18,16,4
+GPT-4o P4 (CoT),116,14.499999999999998,53,4,19,10,28,2
+Claude P3 (Few-shot),92,11.5,27,9,26,22,8,0
+Hybrid v2 (θ=0.90),79,9.875,29,0,13,21,12,4

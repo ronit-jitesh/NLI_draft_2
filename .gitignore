@@ -1,0 +1,17 @@
+# Environment
+.env
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Large logs or data if necessary (README says data/ is included, so I'll keep it)
+# logs_*.txt  # These are quite large (300KB+), I'll exclude them to keep the repo clean
+logs_03.txt
+logs_04.txt
+logs_05.txt
