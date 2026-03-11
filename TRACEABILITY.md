@@ -8,19 +8,21 @@ Every figure, table, and number in `NLI_Comprehensive_Results.md` traces back to
 
 ```bash
 cd "LLM Final"
-python notebooks/01_data_preparation.py
-python notebooks/02_encoder_baselines.py
-python notebooks/03_gpt4o_prompting.py
-python notebooks/04_other_llms.py
-python notebooks/05_hybrid_gatekeeper.py
-python notebooks/05b_hybrid_v3_deberta_gpt4o_32shot.py
-python notebooks/05c_hybrid_v4_deberta_large_gpt4o.py
-python notebooks/05d_hybrid_v5_ensemble_gate.py
-python notebooks/05e_hybrid_v5b.py
-python notebooks/06_cost_analysis.py
-python notebooks/07_figures.py
-python notebooks/08_error_analysis.py
-python notebooks/10_genre_label_analysis.py
+python src/01_data_preparation.py
+python src/02_encoder_baselines.py
+python src/03_gpt4o_prompting.py
+python src/04_other_llms.py
+python src/05a_hybrid_v1_v2_gatekeeper.py
+python src/05b_hybrid_v3_deberta_gpt4o_32shot.py
+python src/05c_hybrid_v4_deberta_large_gpt4o.py
+python src/05d_hybrid_v5_ensemble_gate.py
+python src/05e_hybrid_v5b_tiered.py
+python src/05f_hybrid_v5c_ensemble_claude.py
+python src/06_cost_analysis.py
+python src/07a_figures_main.py
+python src/07b_figure2_pareto.py
+python src/08_error_analysis.py
+python src/09_genre_label_analysis.py
 ```
 
 ---
@@ -33,36 +35,36 @@ python notebooks/10_genre_label_analysis.py
 | `02_encoder_baselines.py` | `results/encoder_predictions_matched.csv` `results/encoder_predictions_mm.csv` | §2.1, §2.2, §2.3, §2.4 |
 | `03_gpt4o_prompting.py` | `results/api_results_gpt4o.csv` `results/api_results_gpt4o_mm.csv` | §3.1, §3.3, §3.4 |
 | `04_other_llms.py` | `results/api_results_claude.csv` `results/api_results_gpt5.csv` `results/api_results_llama.csv` | §4.1, §4.2, §4.3 |
-| `05_hybrid_gatekeeper.py` | `results/hybrid_v1_results.csv` `results/hybrid_v2_results.csv` | §5.2, §5.3 |
-| `05b_hybrid_v3_...py` | `results/hybrid_v3_results.csv` | §5.4 |
-| `05c_hybrid_v4_...py` | `results/hybrid_v4_results.csv` | §5.5 |
-| `05d_hybrid_v5_...py` | `results/hybrid_v5_results.csv` | §5.6 |
-| `05e_hybrid_v5b.py` | `results/hybrid_v5b_results.csv` | §5.7 comparison table |
+| `05a_hybrid_v1_v2_gatekeeper.py` | `results/hybrid_v1_results.csv` `results/hybrid_v2_results.csv` | §5.2, §5.3 |
+| `05b_hybrid_v3_deberta_gpt4o_32shot.py` | `results/hybrid_v3_results.csv` | §5.4 |
+| `05c_hybrid_v4_deberta_large_gpt4o.py` | `results/hybrid_v4_results.csv` | §5.5 |
+| `05d_hybrid_v5_ensemble_gate.py` | `results/hybrid_v5_results.csv` | §5.6 |
+| `05e_hybrid_v5b_tiered.py` | `results/hybrid_v5b_results.csv` | §5.7 comparison table |
 | `06_cost_analysis.py` | `results/cost_summary.csv` | §7.1 full cost table |
-| `07_figures.py` | `figures/fig1_*.png` → `figures/fig12_*.png` | All figures in §2–§8 |
+| `07a_figures_main.py` | `figures/fig1_*.png` → `figures/fig12_*.png` | All figures in §2–§8 |
 | `08_error_analysis.py` | `results/error_analysis.csv` | §8.1, §8.3, §8.4, §8.5 |
-| `10_genre_label_analysis.py` | `results/classification_reports.csv` `results/genre_label_breakdown.csv` `figures/fig13_*.png` `figures/fig14_*.png` `figures/fig15_*.png` | §2.1 P/R/F1 tables, §8 genre analysis |
+| `09_genre_label_analysis.py` | `results/classification_reports.csv` `results/genre_label_breakdown.csv` `figures/fig13_*.png` `figures/fig14_*.png` `figures/fig15_*.png` | §2.1 P/R/F1 tables, §8 genre analysis |
 
 ---
 
 ## Report Section → Source Code Map
 
-| Report Section | Key Claim | Source notebook | Source CSV |
+| Report Section | Key Claim | Source File | Source CSV |
 |---------------|-----------|-----------------|------------|
 | §2.1 DeBERTa 90.1% | Matched accuracy | `02_encoder_baselines.py` | `encoder_predictions_matched.csv` |
-| §2.1 Per-class P/R/F1 | Precision/Recall per label | `10_genre_label_analysis.py` | `classification_reports.csv` |
+| §2.1 Per-class P/R/F1 | Precision/Recall per label | `09_genre_label_analysis.py` | `classification_reports.csv` |
 | §2.2 DeBERTa-base MM 90.8% | Mismatched accuracy | `02_encoder_baselines.py` | `encoder_predictions_mm.csv` |
-| §2.3 Genre breakdown | Fiction 87.8% etc. | `10_genre_label_analysis.py` | `genre_label_breakdown.csv` |
+| §2.3 Genre breakdown | Fiction 87.8% etc. | `09_genre_label_analysis.py` | `genre_label_breakdown.csv` |
 | §3.1 GPT-4o P4 85.5% | Best GPT-4o matched | `03_gpt4o_prompting.py` | `api_results_gpt4o.csv` |
 | §3.1 GPT-4o P1 MM 90.5% | Best mismatched LLM | `03_gpt4o_prompting.py` | `api_results_gpt4o_mm.csv` |
 | §4.2 Claude P3 88.5% | Best pure API | `04_other_llms.py` | `api_results_claude.csv` |
-| §5.2 Hybrid v1 MM 91.3% | Best mismatched hybrid | `05_hybrid_gatekeeper.py` | `hybrid_v1_results.csv` |
-| §5.5 Hybrid v4 90.62% | Best matched overall | `05c_hybrid_v4_...py` | `hybrid_v4_results.csv` |
-| §5.6 v5 Ensemble 87.5% | Unanimous split | `05d_hybrid_v5_...py` | `hybrid_v5_results.csv` |
-| §5.6 GPT-4o 51% on hard 100 | Annotation ceiling | `05d_hybrid_v5_...py` | `hybrid_v5_results.csv` |
+| §5.2 Hybrid v1 MM 91.3% | Best mismatched hybrid | `05a_hybrid_v1_v2_gatekeeper.py` | `hybrid_v1_results.csv` |
+| §5.5 Hybrid v4 90.62% | Best matched overall | `05c_hybrid_v4_deberta_large_gpt4o.py` | `hybrid_v4_results.csv` |
+| §5.6 v5 Ensemble 87.5% | Unanimous split | `05d_hybrid_v5_ensemble_gate.py` | `hybrid_v5_results.csv` |
+| §5.6 GPT-4o 51% on hard 100 | Annotation ceiling | `05d_hybrid_v5_ensemble_gate.py` | `hybrid_v5_results.csv` |
 | §7.1 Cost table | All cost/1k figures | `06_cost_analysis.py` | `cost_summary.csv` |
 | §8.1 Error type counts | 30 Ent→Neu etc. | `08_error_analysis.py` | `error_analysis.csv` |
-| §8.4 Genre error rates | Fiction 12.2% etc. | `10_genre_label_analysis.py` | `genre_label_breakdown.csv` |
+| §8.4 Genre error rates | Fiction 12.2% etc. | `09_genre_label_analysis.py` | `genre_label_breakdown.csv` |
 
 ---
 
@@ -70,22 +72,22 @@ python notebooks/10_genre_label_analysis.py
 
 | Figure | File | Generated by |
 |--------|------|--------------|
-| Fig 1 | `fig1_strategy_accuracy_bar.png` | `07_figures.py` → `plot_strategy_accuracy_bar()` |
-| Fig 2 | `fig2_cost_accuracy_frontier.png` | `notebooks/fix_fig2.py` (standalone, run once) |
-| Fig 3 | `fig3_matched_vs_mismatched.png` | `07_figures.py` → `plot_matched_vs_mismatched()` |
-| Fig 4 | `fig4_per_class_f1.png` | `07_figures.py` → `plot_per_class_f1()` |
-| Fig 5 | `fig5_cm_deberta.png` | `07_figures.py` → `plot_confusion_matrices()` |
-| Fig 6 | `fig6_cm_gpt4o.png` | `07_figures.py` → `plot_confusion_matrices()` |
-| Fig 7 | `fig7_cm_claude.png` | `07_figures.py` → `plot_confusion_matrices()` |
-| Fig 8 | `fig8_cm_hybrid.png` | `07_figures.py` → `plot_confusion_matrices()` |
-| Fig 8b | `fig8b_cm_hybrid_v3.png` | `07_figures.py` → `plot_confusion_matrices()` |
-| Fig 9 | `fig9_genre_heatmap.png` | `07_figures.py` → `plot_genre_heatmap()` |
-| Fig 10 | `fig10_hybrid_threshold.png` | `07_figures.py` → `plot_hybrid_threshold()` |
-| Fig 11 | `fig11_ensemble_breakdown.png` | `07_figures.py` → `plot_ensemble_breakdown()` |
-| Fig 12 | `fig12_gating_comparison.png` | `07_figures.py` → `plot_gating_comparison()` |
-| Fig 13 | `fig13_classification_report_heatmap.png` | `10_genre_label_analysis.py` |
-| Fig 14 | `fig14_genre_label_matrix.png` | `10_genre_label_analysis.py` |
-| Fig 15 | `fig15_per_class_bar_all_models.png` | `10_genre_label_analysis.py` |
+| Fig 1 | `fig1_strategy_accuracy_bar.png` | `07a_figures_main.py` → `plot_strategy_accuracy_bar()` |
+| Fig 2 | `fig2_cost_accuracy_frontier.png` | `07b_figure2_pareto.py` (standalone, run once) |
+| Fig 3 | `fig3_matched_vs_mismatched.png` | `07a_figures_main.py` → `plot_matched_vs_mismatched()` |
+| Fig 4 | `fig4_per_class_f1.png` | `07a_figures_main.py` → `plot_per_class_f1()` |
+| Fig 5 | `fig5_cm_deberta.png` | `07a_figures_main.py` → `plot_confusion_matrices()` |
+| Fig 6 | `fig6_cm_gpt4o.png` | `07a_figures_main.py` → `plot_confusion_matrices()` |
+| Fig 7 | `fig7_cm_claude.png` | `07a_figures_main.py` → `plot_confusion_matrices()` |
+| Fig 8 | `fig8_cm_hybrid.png` | `07a_figures_main.py` → `plot_confusion_matrices()` |
+| Fig 8b | `fig8b_cm_hybrid_v3.png` | `07a_figures_main.py` → `plot_confusion_matrices()` |
+| Fig 9 | `fig9_genre_heatmap.png` | `07a_figures_main.py` → `plot_genre_heatmap()` |
+| Fig 10 | `fig10_hybrid_threshold.png` | `07a_figures_main.py` → `plot_hybrid_threshold()` |
+| Fig 11 | `fig11_ensemble_breakdown.png` | `07a_figures_main.py` → `plot_ensemble_breakdown()` |
+| Fig 12 | `fig12_gating_comparison.png` | `07a_figures_main.py` → `plot_gating_comparison()` |
+| Fig 13 | `fig13_classification_report_heatmap.png` | `09_genre_label_analysis.py` |
+| Fig 14 | `fig14_genre_label_matrix.png` | `09_genre_label_analysis.py` |
+| Fig 15 | `fig15_per_class_bar_all_models.png` | `09_genre_label_analysis.py` |
 
 ---
 

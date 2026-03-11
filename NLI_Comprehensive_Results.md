@@ -553,7 +553,7 @@ This evaluation across 5 encoders, 4 LLM families, 4 prompt strategies, and 5 hy
 ### 10.3 Future Work
 
 1. **Retrieval-augmented few-shot selection**: Replace static P3 examples with dynamically retrieved nearest-neighbour examples from the dev set, expected to improve accuracy on genre-specific edge cases.
-2. **Hybrid v5c — Ensemble Gate + Claude Sonnet**: Replace GPT-4o with Claude Sonnet as the v5 fallback to test whether Claude's stronger reasoning outperforms GPT-4o on the 100 genuinely ambiguous samples. Notebook `05f_hybrid_v5c_ensemble_claude.py` is prepared. Given that Claude P4 timed out in standalone evaluation, `max_tokens` should be reduced to 150 before running.
+2. **Hybrid v5c — Ensemble Gate + Claude Sonnet**: Replace GPT-4o with Claude Sonnet as the v5 fallback to test whether Claude's stronger reasoning outperforms GPT-4o on the 100 genuinely ambiguous samples. Script `src/05f_hybrid_v5c_ensemble_claude.py` is prepared. Given that Claude P4 timed out in standalone evaluation, `max_tokens` should be reduced to 150 before running.
 3. **Re-annotation study**: Use ensemble disagreement gate to identify the highest-ambiguity MultiNLI samples for IAA (Inter-Annotator Agreement) testing, quantifying the proportion of cases that represent genuine annotation noise.
 4. **Latency profiling**: Measure end-to-end inference latency for each architecture to complement the cost analysis with a latency-accuracy Pareto curve.
 
@@ -575,21 +575,23 @@ This evaluation across 5 encoders, 4 LLM families, 4 prompt strategies, and 5 hy
 
 ## Appendix A — Execution Order
 
-Run notebooks in this order:
+Run scripts in this order:
 ```
 01_data_preparation.py          → data/nli_*.csv
 02_encoder_baselines.py         → results/encoder_predictions_*.csv
 03_gpt4o_prompting.py           → results/api_results_gpt4o*.csv
 04_other_llms.py                → results/api_results_{claude,gpt5,llama}.csv
-05_hybrid_gatekeeper.py         → results/hybrid_v{1,2}_results.csv
+05a_hybrid_v1_v2_gatekeeper.py         → results/hybrid_v{1,2}_results.csv
 05b_hybrid_v3_deberta_gpt4o_32shot.py  → results/hybrid_v3_results.csv
 05c_hybrid_v4_deberta_large_gpt4o.py   → results/hybrid_v4_results.csv
 05d_hybrid_v5_ensemble_gate.py         → results/hybrid_v5_results.csv
-05e_hybrid_v5b.py               → results/hybrid_v5b_results.csv [no API calls]
+05e_hybrid_v5b_tiered.py               → results/hybrid_v5b_results.csv [no API calls]
 05f_hybrid_v5c_ensemble_claude.py      → results/hybrid_v5c_results.csv
 06_cost_analysis.py             → results/cost_summary.csv
-07_figures.py                   → figures/fig{1-10}*.png
+07a_figures_main.py                   → figures/fig{1-10}*.png
+07b_figure2_pareto.py                 → figures/fig2_cost_accuracy_frontier.png
 08_error_analysis.py            → results/error_analysis.csv
+09_genre_label_analysis.py            → results/classification_reports.csv, figures/fig{13-15}*.png
 ```
 
 ## Appendix B — Figures Index
