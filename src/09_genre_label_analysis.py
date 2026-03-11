@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Notebook 10 — Genre-wise and Label-wise Analysis
+Notebook 09 — Genre-wise and Label-wise Analysis
 ==================================================
 Produces:
   1. Per-class classification reports (Precision / Recall / F1) for every model
@@ -356,6 +356,6 @@ if not df_reports.empty:
 df_genre = compute_genre_breakdown()
 plot_genre_label_matrix(df_genre)
 
-print("\nNotebook 10 complete.")
+print("\nNotebook 09 complete.")
 print("Outputs: results/classification_reports.csv, results/genre_label_breakdown.csv")
 print("Figures: fig13_classification_report_heatmap.png, fig14_genre_label_matrix.png, fig15_per_class_bar_all_models.png")

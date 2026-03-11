@@ -3,14 +3,14 @@
 Notebook 05 — Hybrid Gatekeeper
 =================================
 Implements confidence-gated hybrid systems:
-    v1: DeBERTa-v3-large + GPT-4o P3 (few-shot)
-    v2: DeBERTa-v3-large + Claude Sonnet P4 (CoT few-shot) — HEADLINE RESULT
+    v1: DeBERTa-v3-base + GPT-4o P3 (few-shot)
+    v2: DeBERTa-v3-base + Claude Sonnet P4 (CoT few-shot) — HEADLINE RESULT
 
 Thresholds: 0.85, 0.90, 0.95
 Runs on BOTH matched (800) and mismatched (400) test sets.
 
 Architecture:
-    Input → DeBERTa-v3-large → confidence ≥ θ? → YES → use encoder (free)
+    Input → DeBERTa-v3-base → confidence ≥ θ? → YES → use encoder (free)
                                                → NO  → call LLM API
 
 Outputs:
@@ -164,8 +164,8 @@ def call_claude_cot(premise, hypothesis, max_retries=3):
 # Core hybrid runner
 # ============================================================
 def run_hybrid(df_test, df_encoder, call_api_fn, threshold,
-               model_col="deberta_v3_large_pred",
-               conf_col="deberta_v3_large_conf",
+               model_col="deberta_v3_base_pred",
+               conf_col="deberta_v3_base_conf",
                set_name="matched", hybrid_name="v1"):
     """
     Run hybrid gatekeeper at a given threshold.

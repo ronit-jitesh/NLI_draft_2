@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.metrics import accuracy_score, f1_score
 
 df = pd.read_csv("results/encoder_predictions_matched.csv")
-models = ["bert_base_pred", "deberta_v3_small_pred", "roberta_base_pred", "deberta_v3_base_pred"]
+models = ["bert_base_pred", "deberta_v3_small_pred", "roberta_base_pred", "deberta_v3_base_pred", "deberta_v3_large_pred"]
 for m in models:
     acc = accuracy_score(df['label_text'], df[m])
     print(f"{m} -> ACC: {acc:.4f}")

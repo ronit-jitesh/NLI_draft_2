@@ -27,7 +27,7 @@ POINTS = [
     ("GPT-4o P1",      0.204,  0.840,  "GPT-4o"),
     ("GPT-4o P2",      0.272,  0.829,  "GPT-4o"),
     ("GPT-4o P3",      0.375,  0.848,  "GPT-4o"),
-    ("GPT-4o P4",      0.407,  0.855,  "GPT-4o"),
+    ("GPT-4o P4",      0.410,  0.855,  "GPT-4o"),
     ("GPT-4o P5",      3.520,  0.840,  "GPT-4o"),
     # Claude (costs from cost_summary.csv)
     ("Claude P1",      0.312,  0.874,  "Claude"),  # CSV: 0.312
@@ -102,7 +102,7 @@ def add_labels_main(ax):
         "GPT-4o P1":      (0.204, 0.840,   7,    8, "left"),
         "GPT-4o P2":      (0.272, 0.829,   7,  -11, "left"),
         "GPT-4o P3":      (0.375, 0.848,   7,    8, "left"),
-        "GPT-4o P4":      (0.407, 0.855,   7,  -11, "left"),
+        "GPT-4o P4":      (0.410, 0.855,   7,  -11, "left"),
         "GPT-4o P5":      (3.520, 0.840,   7,    8, "left"),
         # Claude
         "Claude P1":      (0.310, 0.874,   7,    8, "left"),

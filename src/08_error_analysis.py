@@ -185,7 +185,7 @@ def main():
                 sys = subset.iloc[0]
                 print(f"\nType: {t_true.upper()} predicted as {t_pred.upper()}")
                 print(f"Genre: {sys['genre']}")
-                print(f"Preg: {sys['premise']}")
+                print(f"Premise: {sys['premise']}")
                 print(f"Hyp:  {sys['hypothesis']}")
                 
 if __name__ == "__main__":
